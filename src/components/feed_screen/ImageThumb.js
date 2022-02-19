@@ -1,11 +1,16 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Actions as Router} from 'react-native-router-flux';
 
 const ImageThumb = props => {
+  const onImageClickHandler = () => {
+    Router.Details({title: props.title});
+  };
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onImageClickHandler}>
       <Text>{props.title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
