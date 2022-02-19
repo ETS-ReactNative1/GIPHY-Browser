@@ -13,7 +13,7 @@ const App: () => Node = () => {
       <Router>
         <Scene key="root">
           <Scene key="Feed" component={Feed} hideNavBar initial={true} />
-          <Scene key="Details" component={Details} />
+          <Scene key="Details" component={Details} hideNavBar />
         </Scene>
       </Router>
     </SafeAreaView>

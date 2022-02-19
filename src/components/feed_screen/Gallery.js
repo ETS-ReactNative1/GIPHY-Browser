@@ -6,21 +6,25 @@ import ImageThumb from './ImageThumb';
 const dummy = [
   {
     id: 0,
+    img: require('../../assets/images/1.gif'),
   },
   {
     id: 1,
+    img: require('../../assets/images/2.gif'),
   },
   {
     id: 2,
+    img: require('../../assets/images/3.gif'),
   },
   {
     id: 3,
+    img: require('../../assets/images/4.gif'),
   },
 ];
 
 const Gallery = () => {
   const renderImages = dummy.map((img, index) => {
-    return <ImageThumb key={index} title={index} />;
+    return <ImageThumb key={index} image={img.img} />;
   });
   return <View style={styles.container}>{renderImages}</View>;
 };
