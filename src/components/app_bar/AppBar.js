@@ -18,13 +18,13 @@ const AppBar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
+    padding: Constants.MainPadding,
     backgroundColor: Constants.ColorMain,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 24,
+    marginBottom: Constants.MainPadding,
   },
   title: {
     color: Constants.ColorMainText,

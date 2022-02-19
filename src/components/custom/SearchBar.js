@@ -13,7 +13,6 @@ const SearchBar = () => {
         style={styles.textInput}
         onChangeText={onSearchHandler}
         placeholder="What are you looking for ?"
-        keyboardType="numeric"
       />
       <Icon style={styles.icon} name="search" />
     </View>
@@ -28,6 +27,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textInput: {
+    color: '#777',
     paddingStart: ICON_MARGIN * 2 + 4,
   },
   icon: {
