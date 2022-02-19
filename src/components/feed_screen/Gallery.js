@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    padding: Constants.MainPadding,
+    padding: Constants.MainPadding / 2,
   },
 });
 

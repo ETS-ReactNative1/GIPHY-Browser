@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text, TextInput} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/Octicons';
 
 const ICON_MARGIN = 24;
 
@@ -21,16 +21,18 @@ const SearchBar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 48,
+    height: 54,
     borderRadius: 4,
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
   textInput: {
+    fontSize: 16,
     color: '#777',
     paddingStart: ICON_MARGIN * 2 + 4,
   },
   icon: {
+    fontSize: 16,
     position: 'absolute',
     marginHorizontal: ICON_MARGIN,
   },

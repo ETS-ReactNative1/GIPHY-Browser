@@ -3,16 +3,23 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Constants} from '../../Config';
 import Icon from 'react-native-vector-icons/Entypo';
 import SearchBar from '../custom/SearchBar';
+import LinearGradient from 'react-native-linear-gradient';
 
 const AppBar = () => {
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      start={{x: 0, y: 0}}
+      end={{x: 1, y: 0}}
+      colors={Constants.MainGradient}
+      style={styles.container}>
       <View style={styles.header}>
+        <Icon style={styles.icon} name="menu" />
         <Text style={styles.title}>Gallery</Text>
-        <Icon style={styles.icon} name="dots-two-horizontal" />
+        <Icon style={[styles.icon, {marginStart: 'auto'}]} name="dots-two-horizontal" />
       </View>
+
       <SearchBar />
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -23,13 +30,13 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     marginBottom: Constants.MainPadding,
   },
   title: {
     color: Constants.ColorMainText,
-    fontWeight: 'bold',
     fontSize: 18,
+    marginHorizontal: 36,
   },
   icon: {
     width: 24,
@@ -37,7 +44,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     color: Constants.ColorMainText,
-    fontSize: 18,
+    fontSize: 24,
   },
 });
 
