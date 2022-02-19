@@ -14,7 +14,7 @@ const AppBar = () => {
       style={styles.container}>
       <View style={styles.header}>
         <Icon style={styles.icon} name="menu" />
-        <Text style={styles.title}>Gallery</Text>
+        <Text style={styles.title}>Gify Browser</Text>
         <Icon style={[styles.icon, {marginStart: 'auto'}]} name="dots-two-horizontal" />
       </View>
 

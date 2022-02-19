@@ -20,7 +20,7 @@ const ImageThumb = props => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '46%',
+    width: '48%',
     height: 120,
     marginBottom: '4%',
     borderRadius: 12,

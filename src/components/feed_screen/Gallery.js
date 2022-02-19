@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {Constants} from '../../Config';
 import ImageThumb from './ImageThumb';
+import Title from '../custom/Title';
 
 const dummy = [
   {
@@ -20,22 +21,46 @@ const dummy = [
     id: 3,
     img: require('../../assets/images/4.gif'),
   },
+  {
+    id: 4,
+    img: require('../../assets/images/1.gif'),
+  },
+  {
+    id: 5,
+    img: require('../../assets/images/2.gif'),
+  },
+  {
+    id: 6,
+    img: require('../../assets/images/3.gif'),
+  },
+  {
+    id: 7,
+    img: require('../../assets/images/4.gif'),
+  },
 ];
 
 const Gallery = () => {
-  const renderImages = dummy.map((img, index) => {
-    return <ImageThumb key={index} image={img.img} />;
-  });
-  return <View style={styles.container}>{renderImages}</View>;
+  const renderImages = ({item}) => <ImageThumb image={item.img} />;
+  return (
+    <View style={styles.container}>
+      <Title title={'GIFs'} />
+      <FlatList
+        style={{flex: 1}}
+        data={dummy}
+        renderItem={renderImages}
+        keyExtractor={item => item.id}
+        columnWrapperStyle={{justifyContent: 'space-between'}}
+        numColumns={2}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    padding: Constants.MainPadding / 2,
+    padding: Constants.MainPadding,
+    paddingBottom: 0,
   },
 });
 
