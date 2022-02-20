@@ -40,6 +40,7 @@ const RunTimeSlice = createSlice({
     },
     /**
      * appends fetched gifs to trending array
+     * increment trendingOffset for making pagination
      * @param state
      * @param action
      */
@@ -49,6 +50,7 @@ const RunTimeSlice = createSlice({
     },
     /**
      * appends fetched gifs to search array
+     * increment searchOffset for making pagination
      * @param state
      * @param action
      */
@@ -171,7 +173,7 @@ export const getSearchGifs = () => {
 
 /**
  * get Gif details with the given id to show in the details page
- * @param id
+ * @param id Gif id
  * @returns {(function(*): Promise<void>)|*}
  */
 export const getGif = id => {
