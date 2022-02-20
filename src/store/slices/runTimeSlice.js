@@ -39,19 +39,21 @@ const RunTimeSlice = createSlice({
       state.loadingGifs = action.payload;
     },
     setSelectedCategory(state, action) {
+      state.searchOffset = 0;
+      state.searchGifs = [];
       if (state.selectedCategory === action.payload) {
         state.selectedCategory = '';
         if (state.searchQuery === '') {
           state.isSearching = false;
         }
       } else {
-        state.searchOffset = 0;
-        state.searchGifs = [];
         state.selectedCategory = action.payload;
         state.isSearching = true;
       }
     },
     setSearchQuery(state, action) {
+      state.searchOffset = 0;
+      state.searchGifs = [];
       state.searchQuery = action.payload;
       if (state.searchQuery === '' && state.selectedCategory === '') {
         state.isSearching = false;

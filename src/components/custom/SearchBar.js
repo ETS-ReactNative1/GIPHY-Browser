@@ -2,20 +2,23 @@ import React from 'react';
 import {View, StyleSheet, Text, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
 import {useDispatch} from 'react-redux';
+import { RunTimeActions } from "../../store/slices/runTimeSlice";
 
 const ICON_MARGIN = 24;
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const onSearchHandler = e => {
-    console.log("here");
+  const onSearchHandler = (text) => {
+    dispatch(RunTimeActions.setSearchQuery(text));
   };
 
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.textInput}
-        onSumbitEditing={e => onSearchHandler(e)}
+        onEndEditing={event => onSearchHandler(event.nativeEvent.text)}
+        returnKeyType="search"
+        multiline={false}
         placeholder="What are you looking for ?"
       />
       <Icon style={styles.icon} name="search" />
