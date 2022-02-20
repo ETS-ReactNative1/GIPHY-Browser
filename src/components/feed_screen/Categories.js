@@ -29,7 +29,7 @@ const Categories = () => {
   return (
     <View style={styles.container}>
       <Title title={'Category'} />
-      {isLoadingCategories && <ActivityIndicator color={'#fff'} />}
+      {isLoadingCategories && <ActivityIndicator color={'#999'} />}
       <FlatList
         horizontal={true}
         data={categories}

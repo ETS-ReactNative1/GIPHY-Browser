@@ -1,14 +1,10 @@
 import React, {useEffect} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
 import {Constants} from '../../Config';
 import ImageThumb from './ImageThumb';
 import Title from '../custom/Title';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  getCategories,
-  getSearchGifs,
-  getTrending,
-} from '../../store/slices/runTimeSlice';
+import {getSearchGifs, getTrending} from '../../store/slices/runTimeSlice';
 
 const Gallery = () => {
   const dispatch = useDispatch();
@@ -64,6 +60,7 @@ const Gallery = () => {
         onEndReachedThreshold={0.5}
         onEndReached={loadMore}
       />
+      {isLoadingGifs && <ActivityIndicator color={'#999'} />}
     </View>
   );
 };
