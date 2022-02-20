@@ -5,6 +5,7 @@ import {Constants} from '../Config';
 import MainButton from '../components/custom/MainButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {getGif} from '../store/slices/runTimeSlice';
+import Title from '../components/custom/Title';
 
 const Details = props => {
   const dispatch = useDispatch();
@@ -17,10 +18,16 @@ const Details = props => {
   console.log(detailedImage.image);
   return (
     <View style={styles.container}>
-      <BackButton style={styles.backBtn} onBack={() => dispatch(RunTimeActions.setDetailedImage({}))}/>
+      <BackButton
+        style={styles.backBtn}
+        onBack={() => dispatch(RunTimeActions.setDetailedImage({}))}
+      />
       <Image style={styles.image} source={{uri: detailedImage.image}} />
       <View style={styles.details}>
-        <Text>{detailedImage.title}</Text>
+        <View>
+          <Title title={'Title'} />
+          <Text>{detailedImage.title}</Text>
+        </View>
         <MainButton />
       </View>
     </View>
@@ -46,7 +53,7 @@ const styles = StyleSheet.create({
   details: {
     flex: 1,
     padding: Constants.MainPadding,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
 });
 
