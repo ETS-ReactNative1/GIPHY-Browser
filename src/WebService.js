@@ -38,7 +38,6 @@ export const getSearchGifsWS = async (limit, offset, query) => {
 
 export const getGifWS = async id => {
   const response = await ax.get(id);
-  console.log(response);
   if (response.data.meta.msg === 'OK') {
     const data = response.data.data;
     return {
