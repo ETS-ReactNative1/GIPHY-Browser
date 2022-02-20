@@ -4,7 +4,8 @@ import Icon from 'react-native-vector-icons/Octicons';
 import {Constants} from '../../Config';
 import LinearGradient from 'react-native-linear-gradient';
 
-const MainButton = props => {
+const DownloadButton = props => {
+  console.log(props.onPress);
   return (
     <TouchableOpacity onPress={props.onPress}>
       <LinearGradient
@@ -32,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainButton;
+export default DownloadButton;
