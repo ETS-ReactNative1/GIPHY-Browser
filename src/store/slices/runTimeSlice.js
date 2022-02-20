@@ -29,6 +29,11 @@ const RunTimeSlice = createSlice({
     isLoadingGifs(state, action) {
       state.loadingGifs = action.payload;
     },
+    setSelectedCategory(state, action) {
+      if (state.selectedCategory === action.payload)
+        state.selectedCategory = '';
+      else state.selectedCategory = action.payload;
+    },
   },
 });
 

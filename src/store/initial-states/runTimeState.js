@@ -11,6 +11,7 @@ const runTimeState = {
   searchOffset: 0,
   searchGifs: [],
   detailedImage: {},
+  selectedCategory: '',
 };
 
 export default runTimeState;

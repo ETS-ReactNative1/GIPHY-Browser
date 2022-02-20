@@ -1,19 +1,31 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {RunTimeActions} from '../../store/slices/runTimeSlice';
+import { Constants } from "../../Config";
 
 const CategoryItem = props => {
+  const dispatch = useDispatch();
+  const selectedCategory = useSelector(
+    state => state.runTimeReducer.selectedCategory,
+  );
+  const onSelectCategory = () => {
+    dispatch(RunTimeActions.setSelectedCategory(props.name));
+  };
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.categoryImg}
-        source={{uri : props.image}}
-      />
+    <TouchableOpacity
+      onPress={onSelectCategory}
+      style={[
+        styles.container,
+        selectedCategory === props.name ? styles.selected : {},
+      ]}>
+      <Image style={styles.categoryImg} source={{uri: props.image}} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{props.name}</Text>
         <Icon style={styles.titleIcon} name="cloud-search-outline" />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -29,13 +41,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 4,
+    overflow: 'hidden',
+  },
+  selected: {
+    borderWidth: 2,
+    borderColor: Constants.ColorMain,
   },
   imageContainer: {
     width: '48%',
     height: 120,
     marginBottom: '4%',
-    borderRadius: 12,
-    overflow: 'hidden',
     backgroundColor: '#999',
   },
   categoryImg: {
@@ -58,7 +73,6 @@ const styles = StyleSheet.create({
   },
   titleIcon: {
     color: '#fff',
-    // marginStart: 40,
   },
 });
 
