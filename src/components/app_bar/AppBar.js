@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
 import {Constants} from '../../Config';
 import Icon from 'react-native-vector-icons/Entypo';
 import SearchBar from '../custom/SearchBar';
@@ -29,6 +29,11 @@ const AppBar = () => {
   }
 
   const onChangeGridLayout = () => dispatch(RunTimeActions.alterGridLayout());
+  const onMenuHandler = () => {
+    return Alert.alert('GHIPY Browser', 'Created by Muhammad Sharaf', [
+      {text: 'OK'},
+    ]);
+  };
 
   return (
     <LinearGradient
@@ -37,7 +42,9 @@ const AppBar = () => {
       colors={Constants.MainGradient}
       style={styles.container}>
       <View style={styles.header}>
-        <Icon style={styles.icon} name="menu" />
+        <TouchableOpacity onPress={onMenuHandler}>
+          <Icon style={styles.icon} name="menu" />
+        </TouchableOpacity>
         <Text style={styles.title}>GIPHY Browser</Text>
         <TouchableOpacity
           onPress={onChangeGridLayout}

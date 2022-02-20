@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import runTimeState from '../initial-states/runTimeState';
+import runTimeState from '../initial_states/runTimeState';
 import {
   getCategoriesWS,
   getGifWS,

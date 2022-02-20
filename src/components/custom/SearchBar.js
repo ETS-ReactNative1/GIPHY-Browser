@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RunTimeActions} from '../../store/slices/runTimeSlice';
 import {Constants} from '../../Config';
 
@@ -16,6 +16,7 @@ const ICON_MARGIN = 24;
 const SearchBar = () => {
   const inputEl = useRef(null);
   const dispatch = useDispatch();
+  const searchQuery = useSelector(state => state.runTimeReducer.searchQuery);
   const onSearchHandler = text => {
     dispatch(RunTimeActions.setSearchQuery(text));
   };
@@ -35,8 +36,17 @@ const SearchBar = () => {
         placeholder="What are you looking for ?"
       />
       <Icon style={styles.icon} name="search" />
-      <TouchableOpacity style={styles.clearBtn} onPress={onClearSearchHandler}>
-        <Text style={styles.clearBtnText}>Clear</Text>
+      <TouchableOpacity
+        style={styles.clearBtn}
+        onPress={onClearSearchHandler}
+        disabled={searchQuery === ''}>
+        <Text
+          style={[
+            styles.clearBtnText,
+            searchQuery === '' ? styles.clearBtnDisabled : {},
+          ]}>
+          Clear
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -63,6 +73,9 @@ const styles = StyleSheet.create({
   clearBtn: {
     position: 'absolute',
     right: ICON_MARGIN,
+  },
+  clearBtnDisabled: {
+    color: '#999',
   },
   clearBtnText: {
     fontSize: 16,
