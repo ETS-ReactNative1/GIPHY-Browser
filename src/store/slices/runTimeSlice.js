@@ -11,6 +11,10 @@ const RunTimeSlice = createSlice({
   name: 'runTime',
   initialState: runTimeState,
   reducers: {
+    /**
+     * change grip layout columns count by looping supported array
+     * @param state
+     */
     alterGridLayout(state) {
       state.gridColumnInd =
         (state.gridColumnInd + 1) % state.supportedColumns.length;
@@ -18,26 +22,64 @@ const RunTimeSlice = createSlice({
       state.gridColumnCount = state.supportedColumns[state.gridColumnInd];
       console.log(state.gridColumnCount);
     },
+    /**
+     * set the loading state of categories
+     * @param state
+     * @param action
+     */
     isLoadingCategories(state, action) {
       state.loadingCategories = action.payload;
     },
+    /**
+     * set the categories data
+     * @param state
+     * @param action
+     */
     setCategories(state, action) {
       state.categories = action.payload;
     },
+    /**
+     * appends fetched gifs to trending array
+     * @param state
+     * @param action
+     */
     appendTrendingGifs(state, action) {
       state.trendingGifs.push(...action.payload);
       state.trendingOffset += state.requestLimit;
     },
+    /**
+     * appends fetched gifs to search array
+     * @param state
+     * @param action
+     */
     appendSearchGifs(state, action) {
       state.searchGifs.push(...action.payload);
       state.searchOffset += state.requestLimit;
     },
+    /**
+     * sets detailed image title and image src
+     * @param state
+     * @param action
+     */
     setDetailedImage(state, action) {
       state.detailedImage = action.payload;
     },
+    /**
+     * set the loading state of gallery
+     * @param state
+     * @param action
+     */
     isLoadingGifs(state, action) {
       state.loadingGifs = action.payload;
     },
+    /**
+     * clear search array
+     * if same category is selected it will be unselected
+     * else set selected category state to the selected item
+     * set isSearching state depending on the searching data existing or not
+     * @param state
+     * @param action
+     */
     setSelectedCategory(state, action) {
       state.searchOffset = 0;
       state.searchGifs = [];
@@ -51,6 +93,13 @@ const RunTimeSlice = createSlice({
         state.isSearching = true;
       }
     },
+    /**
+     * clear search array
+     * apply search query to the searchQuery state
+     * set isSearching state depending on the searching data existing or not
+     * @param state
+     * @param action
+     */
     setSearchQuery(state, action) {
       state.searchOffset = 0;
       state.searchGifs = [];
@@ -64,6 +113,10 @@ const RunTimeSlice = createSlice({
   },
 });
 
+/**
+ * get Gifs main categories
+ * @returns {(function(*): Promise<void>)|*}
+ */
 export const getCategories = () => {
   return async dispatch => {
     dispatch(RunTimeActions.isLoadingCategories(true));
@@ -78,6 +131,10 @@ export const getCategories = () => {
   };
 };
 
+/**
+ * get trending Gifs and append data to trendingGifs
+ * @returns {(function(*, *): Promise<void>)|*}
+ */
 export const getTrending = () => {
   return async (dispatch, getState) => {
     const {requestLimit, trendingOffset} = getState().runTimeReducer;
@@ -92,6 +149,10 @@ export const getTrending = () => {
   };
 };
 
+/**
+ * get search result Gifs and append data to searchGifs
+ * @returns {(function(*, *): Promise<void>)|*}
+ */
 export const getSearchGifs = () => {
   return async (dispatch, getState) => {
     const {requestLimit, searchOffset, selectedCategory, searchQuery} =
@@ -108,6 +169,11 @@ export const getSearchGifs = () => {
   };
 };
 
+/**
+ * get Gif details with the given id to show in the details page
+ * @param id
+ * @returns {(function(*): Promise<void>)|*}
+ */
 export const getGif = id => {
   return async dispatch => {
     try {
