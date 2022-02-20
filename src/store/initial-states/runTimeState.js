@@ -3,6 +3,7 @@ const runTimeState = {
   gridColumnInd: 1,
   supportedColumns: [2, 3, 4],
   loadingCategories: true,
+  loadingGifs: true,
   categories: [],
   requestLimit: 20,
   trendingOffset: 0,

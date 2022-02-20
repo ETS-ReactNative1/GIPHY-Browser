@@ -26,6 +26,9 @@ const RunTimeSlice = createSlice({
     setDetailedImage(state, action) {
       state.detailedImage = action.payload;
     },
+    isLoadingGifs(state, action) {
+      state.loadingGifs = action.payload;
+    },
   },
 });
 
@@ -46,10 +49,12 @@ export const getCategories = () => {
 export const getTrending = () => {
   return async (dispatch, getState) => {
     const {requestLimit, trendingOffset} = getState().runTimeReducer;
+    dispatch(RunTimeActions.isLoadingGifs(true));
     console.log(trendingOffset);
     try {
       const response = await getTrendingGifsWS(requestLimit, trendingOffset);
       dispatch(RunTimeActions.appendTrendingGifs(response));
+      dispatch(RunTimeActions.isLoadingGifs(false));
     } catch (error) {
       console.log(error);
     }

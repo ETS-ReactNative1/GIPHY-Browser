@@ -9,6 +9,7 @@ import {getCategories, getTrending} from '../../store/slices/runTimeSlice';
 const Gallery = () => {
   const dispatch = useDispatch();
   const trending = useSelector(state => state.runTimeReducer.trendingGifs);
+  const isLoadingGifs = useSelector(state => state.runTimeReducer.loadingGifs);
   const gridColsCount = useSelector(
     state => state.runTimeReducer.gridColumnCount,
   );
@@ -19,6 +20,7 @@ const Gallery = () => {
     dispatch(getTrending());
   }, [dispatch]);
   const loadMore = () => {
+    if (isLoadingGifs) return;
     dispatch(getTrending());
   };
   return (
@@ -32,7 +34,7 @@ const Gallery = () => {
         columnWrapperStyle={{justifyContent: 'space-between'}}
         key={gridColsCount}
         numColumns={gridColsCount}
-        onEndReachedThreshold={0.8}
+        onEndReachedThreshold={0.5}
         onEndReached={loadMore}
       />
     </View>
