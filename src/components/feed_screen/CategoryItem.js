@@ -3,7 +3,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {RunTimeActions} from '../../store/slices/runTimeSlice';
-import { Constants } from "../../Config";
+import {Constants} from '../../Config';
 
 const CategoryItem = props => {
   const dispatch = useDispatch();
@@ -44,17 +44,16 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   selected: {
-    borderWidth: 2,
+    borderWidth: 3,
     borderColor: Constants.ColorMain,
   },
   imageContainer: {
     width: '48%',
     height: 120,
-    marginBottom: '4%',
-    backgroundColor: '#999',
   },
   categoryImg: {
     position: 'absolute',
+    top: 0,
     width: '100%',
     height: '100%',
   },
