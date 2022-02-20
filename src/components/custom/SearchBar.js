@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 16,
+    fontFamily: 'Fabrica',
     color: '#777',
     paddingStart: ICON_MARGIN * 2 + 4,
   },

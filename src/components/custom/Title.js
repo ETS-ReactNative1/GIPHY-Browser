@@ -8,6 +8,8 @@ const Title = props => {
 const styles = StyleSheet.create({
   container: {
     fontSize: 14,
+    fontFamily: 'Fabrica',
+    fontWeight: 'bold',
     marginBottom: 12,
   },
 });

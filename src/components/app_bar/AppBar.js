@@ -1,11 +1,35 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Constants} from '../../Config';
 import Icon from 'react-native-vector-icons/Entypo';
 import SearchBar from '../custom/SearchBar';
 import LinearGradient from 'react-native-linear-gradient';
+import {useDispatch, useSelector} from 'react-redux';
+import {RunTimeActions} from '../../store/slices/runTimeSlice';
 
 const AppBar = () => {
+  const dispatch = useDispatch();
+  const gridColsCount = useSelector(
+    state => state.runTimeReducer.gridColumnCount,
+  );
+  let gridIconName;
+  switch (gridColsCount) {
+    case 2:
+      gridIconName = 'dots-two-horizontal';
+      break;
+    case 3:
+      gridIconName = 'dots-three-horizontal';
+      break;
+    case 4:
+      gridIconName = 'grid';
+      break;
+    default:
+      gridIconName = 'dots-two-horizontal';
+      break;
+  }
+
+  const onChangeGridLayout = () => dispatch(RunTimeActions.alterGridLayout());
+
   return (
     <LinearGradient
       start={{x: 0, y: 0}}
@@ -15,7 +39,11 @@ const AppBar = () => {
       <View style={styles.header}>
         <Icon style={styles.icon} name="menu" />
         <Text style={styles.title}>Gify Browser</Text>
-        <Icon style={[styles.icon, {marginStart: 'auto'}]} name="dots-two-horizontal" />
+        <TouchableOpacity
+          onPress={onChangeGridLayout}
+          style={styles.iconContainer}>
+          <Icon style={styles.icon} name={gridIconName} />
+        </TouchableOpacity>
       </View>
 
       <SearchBar />
@@ -36,7 +64,11 @@ const styles = StyleSheet.create({
   title: {
     color: Constants.ColorMainText,
     fontSize: 18,
+    fontFamily: 'Fabrica',
     marginHorizontal: 36,
+  },
+  iconContainer: {
+    marginStart: 'auto',
   },
   icon: {
     width: 24,

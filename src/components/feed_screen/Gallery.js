@@ -1,8 +1,9 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Constants} from '../../Config';
 import ImageThumb from './ImageThumb';
 import Title from '../custom/Title';
+import {useSelector} from "react-redux";
 
 const dummy = [
   {
@@ -40,6 +41,9 @@ const dummy = [
 ];
 
 const Gallery = () => {
+  const gridColsCount = useSelector(
+    state => state.runTimeReducer.gridColumnCount,
+  );
   const renderImages = ({item}) => <ImageThumb image={item.img} />;
   return (
     <View style={styles.container}>
@@ -50,7 +54,8 @@ const Gallery = () => {
         renderItem={renderImages}
         keyExtractor={item => item.id}
         columnWrapperStyle={{justifyContent: 'space-between'}}
-        numColumns={2}
+        key={gridColsCount}
+        numColumns={gridColsCount}
       />
     </View>
   );

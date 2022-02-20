@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   details: {
     flex: 1,
     padding: Constants.MainPadding,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
 });
 

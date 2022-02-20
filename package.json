@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
+    "@reduxjs/toolkit": "^1.7.2",
     "react": "17.0.2",
     "react-native": "0.67.2",
     "react-native-gesture-handler": "^2.2.0",
@@ -19,7 +20,8 @@
     "react-native-router-flux": "^4.3.1",
     "react-native-safe-area-context": "^3.4.1",
     "react-native-screens": "^3.12.0",
-    "react-native-vector-icons": "^9.1.0"
+    "react-native-vector-icons": "^9.1.0",
+    "react-redux": "^7.2.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
