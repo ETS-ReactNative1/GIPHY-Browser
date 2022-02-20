@@ -30,7 +30,7 @@ const ImageThumb = props => {
     <TouchableOpacity
       style={[styles.container, styles.containerSize[containerSizeIndex]]}
       onPress={onImageClickHandler}>
-      <Image style={styles.image} source={props.image} />
+      <Image style={styles.image} source={{uri: props.image}} />
       <Text>{props.title}</Text>
     </TouchableOpacity>
   );
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     {
       width: '32%',
       height: 100,
-      marginBottom: '4%',
+      marginBottom: '2%',
     },
     {
       width: '24%',

@@ -5,9 +5,12 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const CategoryItem = props => {
   return (
     <View style={styles.container}>
-      <Image style={styles.categoryImg} source={props.image} />
+      <Image
+        style={styles.categoryImg}
+        source={{uri : props.image}}
+      />
       <View style={styles.titleContainer}>
-        <Text>{props.name}</Text>
+        <Text style={styles.title}>{props.name}</Text>
         <Icon style={styles.titleIcon} name="cloud-search-outline" />
       </View>
     </View>
@@ -16,8 +19,8 @@ const CategoryItem = props => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-between',
-    padding: 12,
+    justifyContent: 'flex-end',
+    height: 80,
     marginEnd: 12,
     borderRadius: 8,
     backgroundColor: '#ddd',
@@ -27,15 +30,34 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 4,
   },
-  categoryImg: {},
+  imageContainer: {
+    width: '48%',
+    height: 120,
+    marginBottom: '4%',
+    borderRadius: 12,
+    overflow: 'hidden',
+    backgroundColor: '#999',
+  },
+  categoryImg: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
   titleContainer: {
     width: 124,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 12,
+    paddingHorizontal: 8,
+    backgroundColor: '#222222aa',
+  },
+  title: {
+    color: '#fff',
+    fontFamily: 'Fabrica',
   },
   titleIcon: {
+    color: '#fff',
     // marginStart: 40,
   },
 });

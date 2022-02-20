@@ -1,66 +1,39 @@
 import React, {useEffect} from 'react';
-import {
-  FlatList,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {Constants} from '../../Config';
 import ImageThumb from './ImageThumb';
 import Title from '../custom/Title';
-import {useSelector} from 'react-redux';
-
-const dummy = [
-  {
-    id: 0,
-    img: require('../../assets/images/1.gif'),
-  },
-  {
-    id: 1,
-    img: require('../../assets/images/2.gif'),
-  },
-  {
-    id: 2,
-    img: require('../../assets/images/3.gif'),
-  },
-  {
-    id: 3,
-    img: require('../../assets/images/4.gif'),
-  },
-  {
-    id: 4,
-    img: require('../../assets/images/1.gif'),
-  },
-  {
-    id: 5,
-    img: require('../../assets/images/2.gif'),
-  },
-  {
-    id: 6,
-    img: require('../../assets/images/3.gif'),
-  },
-  {
-    id: 7,
-    img: require('../../assets/images/4.gif'),
-  },
-];
+import {useDispatch, useSelector} from 'react-redux';
+import {getCategories, getTrending} from '../../store/slices/runTimeSlice';
 
 const Gallery = () => {
+  const dispatch = useDispatch();
+  const trending = useSelector(state => state.runTimeReducer.trendingGifs);
   const gridColsCount = useSelector(
     state => state.runTimeReducer.gridColumnCount,
   );
-  const renderImages = ({item}) => <ImageThumb image={item.img} />;
-
+  const renderImages = ({item}) => (
+    <ImageThumb id={item.id} image={item.image} />
+  );
+  useEffect(() => {
+    dispatch(getTrending());
+  }, [dispatch]);
+  const loadMore = () => {
+    dispatch(getTrending());
+  };
   return (
     <View style={styles.container}>
-      <Title title={'Trending GIFs'} />
+      <Title title={'Trending'} />
       <FlatList
         style={{flex: 1}}
-        data={dummy}
+        data={trending}
         renderItem={renderImages}
         keyExtractor={item => item.id}
         columnWrapperStyle={{justifyContent: 'space-between'}}
         key={gridColsCount}
         numColumns={gridColsCount}
+        onEndReachedThreshold={0.5}
+        onEndReached={loadMore}
       />
     </View>
   );
