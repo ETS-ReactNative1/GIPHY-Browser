@@ -32,7 +32,7 @@ const Gallery = () => {
         columnWrapperStyle={{justifyContent: 'space-between'}}
         key={gridColsCount}
         numColumns={gridColsCount}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.8}
         onEndReached={loadMore}
       />
     </View>

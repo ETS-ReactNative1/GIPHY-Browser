@@ -9,6 +9,7 @@ const runTimeState = {
   trendingGifs: [],
   searchOffset: 0,
   searchGifs: [],
+  detailedImage: {},
 };
 
 export default runTimeState;

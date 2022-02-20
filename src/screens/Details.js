@@ -1,16 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import BackButton from '../components/custom/BackButton';
 import {Constants} from '../Config';
 import MainButton from '../components/custom/MainButton';
+import {useDispatch, useSelector} from 'react-redux';
+import {getGif} from '../store/slices/runTimeSlice';
 
 const Details = props => {
+  const dispatch = useDispatch();
+  const detailedImage = useSelector(
+    state => state.runTimeReducer.detailedImage,
+  );
+  useEffect(() => {
+    dispatch(getGif(props.id));
+  }, [dispatch]);
+  console.log(detailedImage.image);
   return (
     <View style={styles.container}>
-      <BackButton style={styles.backBtn} />
-      <Image style={styles.image} source={props.image} />
+      <BackButton style={styles.backBtn} onBack={() => dispatch(RunTimeActions.setDetailedImage({}))}/>
+      <Image style={styles.image} source={{uri: detailedImage.image}} />
       <View style={styles.details}>
-        <Text>Test</Text>
+        <Text>{detailedImage.title}</Text>
         <MainButton />
       </View>
     </View>

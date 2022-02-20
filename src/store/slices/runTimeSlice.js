@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import runTimeState from '../initial-states/runTimeState';
-import {getCategoriesWS, getTrendingGifsWS} from '../../WebService';
+import {getCategoriesWS, getGifWS, getTrendingGifsWS} from '../../WebService';
 
 const RunTimeSlice = createSlice({
   name: 'runTime',
@@ -23,6 +23,9 @@ const RunTimeSlice = createSlice({
       state.trendingGifs.push(...action.payload);
       state.trendingOffset += state.requestLimit;
     },
+    setDetailedImage(state, action) {
+      state.detailedImage = action.payload;
+    },
   },
 });
 
@@ -43,9 +46,21 @@ export const getCategories = () => {
 export const getTrending = () => {
   return async (dispatch, getState) => {
     const {requestLimit, trendingOffset} = getState().runTimeReducer;
+    console.log(trendingOffset);
     try {
       const response = await getTrendingGifsWS(requestLimit, trendingOffset);
       dispatch(RunTimeActions.appendTrendingGifs(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getGif = id => {
+  return async dispatch => {
+    try {
+      const response = await getGifWS(id);
+      dispatch(RunTimeActions.setDetailedImage(response));
     } catch (error) {
       console.log(error);
     }

@@ -23,7 +23,7 @@ const ImageThumb = props => {
       break;
   }
   const onImageClickHandler = () => {
-    Router.Details({image: props.image});
+    Router.Details({id: props.id});
   };
 
   return (
