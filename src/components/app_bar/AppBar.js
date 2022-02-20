@@ -38,7 +38,7 @@ const AppBar = () => {
       style={styles.container}>
       <View style={styles.header}>
         <Icon style={styles.icon} name="menu" />
-        <Text style={styles.title}>Gify Browser</Text>
+        <Text style={styles.title}>GIPHY Browser</Text>
         <TouchableOpacity
           onPress={onChangeGridLayout}
           style={styles.iconContainer}>

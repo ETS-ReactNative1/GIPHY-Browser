@@ -1,48 +1,32 @@
 import React, {useEffect} from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View } from "react-native";
 import {Constants} from '../../Config';
 import Title from '../custom/Title';
 import CategoryItem from './CategoryItem';
-import {getCategoriesWS} from '../../WebService';
-
-const dummy = [
-  {
-    id: 0,
-    name: 'cat',
-  },
-  {
-    id: 1,
-    name: 'cat',
-  },
-  {
-    id: 2,
-    name: 'cat',
-  },
-  {
-    id: 3,
-    name: 'cat',
-  },
-  {
-    id: 4,
-    name: 'cat',
-  },
-];
+import CategoriesData from '../../data/categories';
+import {useDispatch} from 'react-redux';
+import {getCategories} from '../../store/slices/runTimeSlice';
 
 const Categories = () => {
-  const renderCategory = ({item}) => <CategoryItem name={item.name} />;
+  const dispatch = useDispatch();
+  const renderCategory = ({item}) => (
+    <CategoryItem name={item.name} icon={item.icon} />
+  );
 
   useEffect(() => {
-    getCategoriesWS();
-  }, []);
+    dispatch(getCategories());
+    console.log('here');
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
       <Title title={'Category'} />
+      <ActivityIndicator color={"#fff"} />
       <FlatList
         horizontal={true}
-        data={dummy}
+        data={CategoriesData}
         renderItem={renderCategory}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.key}
       />
     </View>
   );

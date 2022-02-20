@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image, Platform, UIManager, LayoutAnimation } from "react-native";
+import React, {useEffect} from 'react';
+import {StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import {Actions as Router} from 'react-native-router-flux';
 import {useSelector} from 'react-redux';
 
