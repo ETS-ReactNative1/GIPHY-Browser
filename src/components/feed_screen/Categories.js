@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {Constants} from '../../Config';
 import Title from '../custom/Title';
 import CategoryItem from './CategoryItem';
+import {getCategoriesWS} from '../../WebService';
 
 const dummy = [
   {
@@ -29,6 +30,11 @@ const dummy = [
 
 const Categories = () => {
   const renderCategory = ({item}) => <CategoryItem name={item.name} />;
+
+  useEffect(() => {
+    getCategoriesWS();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Title title={'Category'} />

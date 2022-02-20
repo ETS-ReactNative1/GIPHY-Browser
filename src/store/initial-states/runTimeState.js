@@ -1,5 +1,5 @@
 const runTimeState = {
-  gridColumnCount: 2,
+  gridColumnCount: 3,
   gridColumnInd: 0,
   supportedColumns: [2, 3, 4],
 };

@@ -1,9 +1,13 @@
-import React from 'react';
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  FlatList,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {Constants} from '../../Config';
 import ImageThumb from './ImageThumb';
 import Title from '../custom/Title';
-import {useSelector} from "react-redux";
+import {useSelector} from 'react-redux';
 
 const dummy = [
   {
@@ -45,9 +49,10 @@ const Gallery = () => {
     state => state.runTimeReducer.gridColumnCount,
   );
   const renderImages = ({item}) => <ImageThumb image={item.img} />;
+
   return (
     <View style={styles.container}>
-      <Title title={'GIFs'} />
+      <Title title={'Trending GIFs'} />
       <FlatList
         style={{flex: 1}}
         data={dummy}
