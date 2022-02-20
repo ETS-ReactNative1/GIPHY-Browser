@@ -23,9 +23,11 @@ const Gallery = () => {
   const gridColsCount = useSelector(
     state => state.runTimeReducer.gridColumnCount,
   );
+
   const renderImages = ({item}) => (
     <ImageThumb id={item.id} image={item.image} />
   );
+
   useEffect(() => {
     if (isSearching && (selectedCategory !== '' || searchQuery !== '')) {
       dispatch(getSearchGifs());
@@ -40,7 +42,13 @@ const Gallery = () => {
   };
   return (
     <View style={styles.container}>
-      <Title title={'Trending'} />
+      <Title
+        title={
+          isSearching
+            ? `Results for ( ${'-' + selectedCategory + '-'} ${searchQuery + ' '})`
+            : 'Trending'
+        }
+      />
       <FlatList
         style={{flex: 1}}
         data={isSearching ? searchGifs : trendingGifs}
