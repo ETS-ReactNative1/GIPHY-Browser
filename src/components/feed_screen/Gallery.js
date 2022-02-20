@@ -45,7 +45,11 @@ const Gallery = () => {
       <Title
         title={
           isSearching
-            ? `Results for ( ${'-' + selectedCategory + '-'} ${searchQuery + ' '})`
+            ? `Results for:  ${
+                selectedCategory !== ''
+                  ? ' -' + selectedCategory + '- ' + searchQuery + ' '
+                  : searchQuery
+              }`
             : 'Trending'
         }
       />
