@@ -4,12 +4,22 @@ import {Constants} from '../../Config';
 import ImageThumb from './ImageThumb';
 import Title from '../custom/Title';
 import {useDispatch, useSelector} from 'react-redux';
-import {getCategories, getTrending} from '../../store/slices/runTimeSlice';
+import {
+  getCategories,
+  getSearchGifs,
+  getTrending,
+} from '../../store/slices/runTimeSlice';
 
 const Gallery = () => {
   const dispatch = useDispatch();
-  const trending = useSelector(state => state.runTimeReducer.trendingGifs);
+  const trendingGifs = useSelector(state => state.runTimeReducer.trendingGifs);
+  const searchGifs = useSelector(state => state.runTimeReducer.searchGifs);
   const isLoadingGifs = useSelector(state => state.runTimeReducer.loadingGifs);
+  const isSearching = useSelector(state => state.runTimeReducer.isSearching);
+  const searchQuery = useSelector(state => state.runTimeReducer.searchQuery);
+  const selectedCategory = useSelector(
+    state => state.runTimeReducer.selectedCategory,
+  );
   const gridColsCount = useSelector(
     state => state.runTimeReducer.gridColumnCount,
   );
@@ -17,18 +27,23 @@ const Gallery = () => {
     <ImageThumb id={item.id} image={item.image} />
   );
   useEffect(() => {
-    dispatch(getTrending());
-  }, [dispatch]);
+    if (isSearching && (selectedCategory !== '' || searchQuery !== '')) {
+      dispatch(getSearchGifs());
+    } else if (trendingGifs.length === 0) {
+      dispatch(getTrending());
+    }
+  }, [selectedCategory, searchQuery, isSearching, dispatch]);
+
   const loadMore = () => {
     if (isLoadingGifs) return;
-    dispatch(getTrending());
+    isSearching ? dispatch(getSearchGifs()) : dispatch(getTrending());
   };
   return (
     <View style={styles.container}>
       <Title title={'Trending'} />
       <FlatList
         style={{flex: 1}}
-        data={trending}
+        data={isSearching ? searchGifs : trendingGifs}
         renderItem={renderImages}
         keyExtractor={item => item.id}
         columnWrapperStyle={{justifyContent: 'space-between'}}

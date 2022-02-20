@@ -1,6 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit';
 import runTimeState from '../initial-states/runTimeState';
-import {getCategoriesWS, getGifWS, getTrendingGifsWS} from '../../WebService';
+import {
+  getCategoriesWS,
+  getGifWS,
+  getSearchGifsWS,
+  getTrendingGifsWS,
+} from '../../WebService';
 
 const RunTimeSlice = createSlice({
   name: 'runTime',
@@ -23,6 +28,10 @@ const RunTimeSlice = createSlice({
       state.trendingGifs.push(...action.payload);
       state.trendingOffset += state.requestLimit;
     },
+    appendSearchGifs(state, action) {
+      state.searchGifs.push(...action.payload);
+      state.searchOffset += state.requestLimit;
+    },
     setDetailedImage(state, action) {
       state.detailedImage = action.payload;
     },
@@ -30,9 +39,25 @@ const RunTimeSlice = createSlice({
       state.loadingGifs = action.payload;
     },
     setSelectedCategory(state, action) {
-      if (state.selectedCategory === action.payload)
+      if (state.selectedCategory === action.payload) {
         state.selectedCategory = '';
-      else state.selectedCategory = action.payload;
+        if (state.searchQuery === '') {
+          state.isSearching = false;
+        }
+      } else {
+        state.searchOffset = 0;
+        state.searchGifs = [];
+        state.selectedCategory = action.payload;
+        state.isSearching = true;
+      }
+    },
+    setSearchQuery(state, action) {
+      state.searchQuery = action.payload;
+      if (state.searchQuery === '' && state.selectedCategory === '') {
+        state.isSearching = false;
+      } else {
+        state.isSearching = true;
+      }
     },
   },
 });
@@ -55,10 +80,25 @@ export const getTrending = () => {
   return async (dispatch, getState) => {
     const {requestLimit, trendingOffset} = getState().runTimeReducer;
     dispatch(RunTimeActions.isLoadingGifs(true));
-    console.log(trendingOffset);
     try {
       const response = await getTrendingGifsWS(requestLimit, trendingOffset);
       dispatch(RunTimeActions.appendTrendingGifs(response));
+      dispatch(RunTimeActions.isLoadingGifs(false));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getSearchGifs = () => {
+  return async (dispatch, getState) => {
+    const {requestLimit, searchOffset, selectedCategory, searchQuery} =
+      getState().runTimeReducer;
+    dispatch(RunTimeActions.isLoadingGifs(true));
+    try {
+      const query = selectedCategory + ' ' + searchQuery;
+      const response = await getSearchGifsWS(requestLimit, searchOffset, query);
+      dispatch(RunTimeActions.appendSearchGifs(response));
       dispatch(RunTimeActions.isLoadingGifs(false));
     } catch (error) {
       console.log(error);

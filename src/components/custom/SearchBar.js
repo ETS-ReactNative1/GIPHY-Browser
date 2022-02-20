@@ -1,17 +1,21 @@
 import React from 'react';
 import {View, StyleSheet, Text, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
+import {useDispatch} from 'react-redux';
 
 const ICON_MARGIN = 24;
 
 const SearchBar = () => {
-  const onSearchHandler = () => {};
+  const dispatch = useDispatch();
+  const onSearchHandler = e => {
+    console.log("here");
+  };
 
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.textInput}
-        onChangeText={onSearchHandler}
+        onSumbitEditing={e => onSearchHandler(e)}
         placeholder="What are you looking for ?"
       />
       <Icon style={styles.icon} name="search" />

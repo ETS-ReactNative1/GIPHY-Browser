@@ -12,6 +12,8 @@ const runTimeState = {
   searchGifs: [],
   detailedImage: {},
   selectedCategory: '',
+  searchQuery: '',
+  isSearching: false,
 };
 
 export default runTimeState;

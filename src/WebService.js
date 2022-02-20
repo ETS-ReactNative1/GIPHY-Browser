@@ -25,6 +25,17 @@ export const getTrendingGifsWS = async (limit, offset) => {
   } else throw new Error('Fetching data failed');
 };
 
+export const getSearchGifsWS = async (limit, offset, query) => {
+  const response = await ax.get('search', {
+    params: {limit, offset, q: query, bundle: 'low_bandwidth'},
+  });
+  if (response.data.meta.msg === 'OK') {
+    return response.data.data.map(el => {
+      return {id: el.id, image: el.images.fixed_height_downsampled.url};
+    });
+  } else throw new Error('Fetching data failed');
+};
+
 export const getGifWS = async id => {
   const response = await ax.get(id);
   console.log(response);
