@@ -1,7 +1,7 @@
 ## Table of Content
 
 1. [Introduction](#introduction)
-2. [Installtion](#installation)
+2. [Installation](#installation)
 3. [Project Structure](#project-structure)
 4. [Features](#features)
 5. [Flow](#flow)
