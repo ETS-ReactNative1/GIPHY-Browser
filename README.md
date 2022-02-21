@@ -73,8 +73,7 @@ The Application home screen contains search bar in which you write keywords to f
 The Grid displaying GIFs can be customizable using the icon in App bar to show results in a grid containing 2, 3, or 4 columns based on the selection.
 When clicking on a GIF a new screen with GIF information and a higher quality version of the GIF will be displayed with the option to save it to the gallery and a back button to return to home screen.
 
-![Demonstration](https://i.ibb.co/dKhmRwJ/giphy.gif)
-
+[Watch this demo video](https://i.ibb.co/521c0Cq/20220221-020458.gif)
 
 ## Dependencies
 1. Axios
