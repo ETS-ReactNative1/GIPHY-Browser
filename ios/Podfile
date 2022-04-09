@@ -16,6 +16,8 @@ target 'imageViewer' do
 
   pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
 
+  pod 'RNShare', :path => '../node_modules/react-native-share'
+
   target 'imageViewerTests' do
     inherit! :complete
     # Pods for testing

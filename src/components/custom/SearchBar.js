@@ -33,7 +33,7 @@ const SearchBar = () => {
         onEndEditing={event => onSearchHandler(event.nativeEvent.text)}
         returnKeyType="search"
         multiline={false}
-        placeholder="What are you looking for ?"
+        placeholder="What are you looking for?"
       />
       <Icon style={styles.icon} name="search" />
       <TouchableOpacity
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     right: ICON_MARGIN,
   },
   clearBtnDisabled: {
-    color: '#999',
+    display: 'none',
   },
   clearBtnText: {
     fontSize: 16,

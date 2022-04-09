@@ -1,12 +1,16 @@
-import React, {useEffect} from 'react';
-import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import Share from 'react-native-share';
+import Icon from 'react-native-vector-icons/AntDesign';
 import BackButton from '../components/custom/BackButton';
 import {Constants} from '../Config';
-import DownloadButton from '../components/custom/DownloadButton';
+import CustomButton from '../components/custom/CustomButton';
+import CustomIconButton from '../components/custom/CustomIconButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {getGif} from '../store/slices/runTimeSlice';
 import Title from '../components/custom/Title';
 import saveToGallery from '../utils/saveToGallery';
+import convertToBase64 from '../utils/convertToBase64';
 
 const Details = props => {
   const dispatch = useDispatch();
@@ -22,13 +26,29 @@ const Details = props => {
     <View style={styles.container}>
       <BackButton style={styles.backBtn} />
       <Image style={styles.image} source={{uri: detailedImage.image}} />
-      <View style={styles.details}>
+      <ScrollView style={styles.details}>
         <View>
           <Title title={'Title'} />
           <Text>{detailedImage.title}</Text>
         </View>
-        <DownloadButton onPress={() => saveToGallery(id, detailedImage.image)} />
-      </View>
+        <View style={styles.actionsContainer}>
+          <CustomButton
+            title={'Share'}
+            onPress={async () => {
+              const base64 = await convertToBase64(detailedImage.image);
+              await Share.open({
+                url: `data:image/gif;base64,${base64}`,
+              });
+            }}
+          />
+          <CustomIconButton
+            Icon={Icon}
+            iconName={'download'}
+            style={{width: 64, marginStart: 8}}
+            onPress={() => saveToGallery(id, detailedImage.image)}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -52,7 +72,11 @@ const styles = StyleSheet.create({
   details: {
     flex: 1,
     padding: Constants.MainPadding,
-    justifyContent: 'space-around',
+  },
+  actionsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 64,
   },
 });
 

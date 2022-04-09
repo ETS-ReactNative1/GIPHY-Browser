@@ -1,19 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Octicons';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {Constants} from '../../Config';
 import LinearGradient from 'react-native-linear-gradient';
 
-const DownloadButton = props => {
-  console.log(props.onPress);
+const CustomIconButton = props => {
   return (
     <TouchableOpacity onPress={props.onPress}>
       <LinearGradient
-        style={styles.container}
+        style={[styles.container, props.style]}
         start={{x: 0, y: 0}}
         end={{x: 1, y: 0}}
         colors={Constants.MainGradient}>
-        <Text style={styles.text}>Download</Text>
+        <props.Icon style={styles.icon} name={props.iconName} />
       </LinearGradient>
     </TouchableOpacity>
   );
@@ -21,16 +19,17 @@ const DownloadButton = props => {
 
 const styles = StyleSheet.create({
   container: {
+    height: 56,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
     borderRadius: 8,
   },
-  text: {
+  icon: {
     fontSize: 18,
     fontFamily: 'Fabrica',
     color: '#fff',
   },
 });
 
-export default DownloadButton;
+export default CustomIconButton;
